@@ -5,7 +5,7 @@
 PLAYER::PLAYER()
 {
     // 画像読み込み
-    // DrawGraph("../graphics/player1.png");
+    /// DrawGraph("../graphics/player1.png");
 
     width=64;
     height=64;
