@@ -83,4 +83,21 @@ void PLAYER::Move()
             xcount = 0;
         ++ycount;
     }
+
+    // カウント数から添字を求める
+    ix=abs(xcount)%30/10;
+    iy=abs(ycount)%30/10;
+
+    // xカウントがプラスなら右向きなので、4行目の先頭添字番号を足す
+    if(xcount>0)
+    {
+        ix+=3;
+        result=ix;
+    }else if(xcount<0){
+        // マイナスなら左向きなので、4行目の先頭添字版後を足す
+        ix=9;
+        result=ix;
+    }
+
+    
 }
