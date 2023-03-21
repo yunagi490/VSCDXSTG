@@ -3,8 +3,11 @@
 class CONTROL
 {
 private:
-    // プレイヤークラスのポインタ
+    // プレイヤークラス
     PLAYER *player;
+
+    // 背景クラス
+    BACK *back;
 
 public:
     CONTROL();

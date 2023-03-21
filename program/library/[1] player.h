@@ -1,3 +1,5 @@
+#include "[4] define.h"
+
 class PLAYER
 {
 private:
@@ -15,15 +17,21 @@ private:
 
     // 横方向と縦方向のカウント数
     int xcount, ycount;
-
     // 添字用変数
     int ix, iy, result;
-    // 生きているかどうかのデフラグ
+
+    // 生きているかどうかのフラグ
     bool life;
 
+    // 弾
+    SHOT shot[PSHOT_NUM];
+
+    // カウント
+    int count;
 private:
     void Move();
     void Draw();
+    void Shot();
 
 public:
     PLAYER();
