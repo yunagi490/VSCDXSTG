@@ -25,4 +25,12 @@ void CONTROL::All()
     player->All();
     back->All();
 
+    if(enemy!=NULL){
+        if(enemy->All()){
+            delete enemy;
+            enemy=NULL;
+        }
+    }
+
+    ++g_count;
 }

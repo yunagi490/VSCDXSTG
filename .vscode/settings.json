@@ -35,7 +35,9 @@
   ],
   "C_Cpp_Runner.useAddressSanitizer": false,
   "cSpell.words": [
+    "endflag",
     "PSHOT",
+    "SNUM",
     "xcount",
     "ycount"
   ],

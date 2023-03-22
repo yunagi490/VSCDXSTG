@@ -1,12 +1,16 @@
+#include <windows.h>
+#include <tchar.h>
 #include "DxLib.h"
 #include "[0] control.h"
 
 // キー取得配列
 char key[256];
 
+char g_count;
+
 // プログラムは WinMain から始まります
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                   LPSTR lpCmdLine, int nCmdShow)
+                LPSTR lpCmdLine, int nCmdShow)
 {
     ChangeWindowMode(TRUE);
 
@@ -18,10 +22,10 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
     }
     CONTROL *control = new CONTROL;
     while (ScreenFlip() == 0 && ProcessMessage() == 0 &&
-           ClearDrawScreen() == 0 && GetHitKeyStateAll(key) == 0)
-           {
+            ClearDrawScreen() == 0 && GetHitKeyStateAll(key) == 0)
+            {
             control->All();
-           }
+            }
     // Dxライブラリ使用の終了処理
     DxLib_End();
 

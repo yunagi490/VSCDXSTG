@@ -50,6 +50,36 @@ PLAYER::PLAYER()
 
 
 }
+
+void PLAYER::Shot()
+{
+    // キーが押されててかつ、6ループに一回発射
+    if(key[KEY_INPUT_Z]==1&&count%6==0){
+        for(int i=0;i<PSHOT_NUM;++i){
+            if(shot[i].flag==false){
+                shot[i].flag==true;
+                shot[i].x=x;
+                shot[i].y=y;
+                break;
+            }
+        }
+    }
+
+    // 弾を移動させる処理
+    for(int i=0;i<PSHOT_NUM;++i){
+        // 発射してる弾だけ
+        if(shot[i].flag){
+            shot[i].y-=PSHOT_SPEED;
+
+            // 画面の外にはみ出したらフラグを戻す
+            if(shot[i].y<-10){
+                shot[i].flag=false;
+            }
+        }
+    }
+}
+
+
 void PLAYER::Move()
 {
     if (key[KEY_INPUT_LEFT] || key[KEY_INPUT_RIGHT] == 1)
@@ -171,4 +201,24 @@ void PLAYER::Move()
     {
         ycount = 0;
     }
+}
+void PLAYER::Draw(){
+    // 弾描画
+    for(int i=0;i<PSHOT_NUM;++i){
+        if(shot[i].flag){
+            DrawGraph(shot[i].x-shot[i].width/2,shot[i].y-shot[i].height/2,shot[i].gh,TRUE);
+        }
+    }
+    // 生きていれば描画
+    if(life){
+        // 描画
+        DrawGraph(x-width/2,y-height/2,gh[result],TRUE);
+    }
+}
+void PLAYER::All(){
+    Move();
+    Shot();
+    Draw();
+
+    ++count;
 }
