@@ -64,7 +64,54 @@ ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
 }
 void ENEMY::Shot()
 {
-    
+    // 発射タイミングになったら、フラグを立てる
+    if(shot_time==g_count){
+        sflag=true;
+    }
+    // フラグが立ってるときだけ
+    if(sflag){
+        switch(s_pattern){
+            case 0:
+                // 10回に一回発射.40までなので5発発射
+                if(scount%10==0&&scount<=40){
+                    for (int i=0;i<ENEMY_SNUM;++i){
+                        // フラグが立ってない弾を探して、座標等をセット
+                        if(shot[i].flag==false){
+                            shot[i].flag=true;
+                            shot[i].x=x;
+                            shot[i].y=y;
+                            break;
+                        }
+                    }
+
+                }
+                break;
+        }
+        // フラグが立ってる弾の数
+        int s=0;
+
+        // フラグ立ってる弾だけ、弾の移動を行う
+        for(int i=0;i<ENEMY_SNUM;++i){
+            if(shot[i].flag){
+                shot[i].y+=shot[i].speed;
+
+                // 弾が画面をはみ出たらフラグを戻す
+                if(shot[i].x<-20    ||  shot[i].x->402  ||  shot[i].y<-20   ||  shot[i].y->500){
+                    shot[i].y+=shot[i].flag=false;
+                    continue;
+                }
+                ++s;
+            }
+        }
+        // sがゼロということは発射中の弾がない
+        // かつdeadflagがTRUEということはこの敵のクラスは消滅させてもよい
+        if(s==0&&deadflag){
+            // 敵消滅フラグをTRUEにする
+            endflag=true;
+        }
+        ++scount;
+    }
+
 }
 void ENEMY::Move()
 {
@@ -83,7 +130,14 @@ void ENEMY::Move()
 void ENEMY::Draw()
 {
     int temp;
-    if(!endflag){
+    // 弾から最初に描画
+    for(int i=0;i<ENEMY_SNUM;++i){
+        if(shot[i].flag){
+            DrawGraph(shot[i].x,shot[i].y,shot[i].gh,true);
+        }
+    }
+
+    if(!deadflag){
         temp=count%40/10;
         if(temp==3)
         temp=1;
@@ -95,6 +149,7 @@ void ENEMY::Draw()
 bool ENEMY::All()
 {
     Move();
+    Shot();
     Draw();
     ++count;
 

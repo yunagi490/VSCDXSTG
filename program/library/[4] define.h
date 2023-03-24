@@ -29,6 +29,23 @@ struct E_SHOT{
     int speed;
 };
 
+struct ENEMYDATA{
+    int type;   // 敵種類
+    int stype;  // 弾種類
+    int m_pattern;  // 移動パターン
+    int s_pattern;  // 発射パターン
+    int in_time;    // 出現時間
+    int stop_time;  // 停止時間
+    int shot_time;  // 弾発射時間
+    int out_time;   // 帰還時間
+    int x;          // x座標
+    int y;          // y座標
+    int speed;      // 弾スピード
+    int hp;         // HP
+    int item;       // アイテム
+};
+
+#define ENEMY_NUM 5
 // extern宣言してkey配列に何処からでもアクセスできるようにする
 extern char key[256];
 extern char g_count;
