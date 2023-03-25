@@ -6,7 +6,7 @@ ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
             int in_time,int stop_time, int shot_time,int out_time,
                 char *s_filename,int stype,int s_pattern,int speed)
 {
-    LoadGraph("../graphics/n_enemy1.png");
+    // サイズ
     width=64;
     height=64;
 
@@ -34,6 +34,9 @@ ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
     int w,h;
     GetGraphSize(temp,&w,&h);
 
+    // 敵画像読み込み
+    LoadGraph("../graphics/n_enemy1.png");
+    
     // 弾の初期化
     for(int i=0;i<ENEMY_SNUM;++i){
         shot[i].flag=false;
