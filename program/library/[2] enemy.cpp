@@ -10,9 +10,8 @@ ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
     width=64;
     height=64;
 
-    // 敵の種類
+    // 敵の種類と弾の種類
     this->type=type;
-    // 弾の種類
     this->stype=stype;
 
     // 移動パターンとショットパターン

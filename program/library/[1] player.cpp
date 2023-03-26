@@ -5,7 +5,6 @@
 
 #include <stdio.h>
 
-
 PLAYER::PLAYER()
 {
     // 画像読み込み
@@ -27,58 +26,61 @@ PLAYER::PLAYER()
     y = 400;
 
     // 生きてるかどうか
-    life=true;
+    life = true;
 
     //  弾初期化
-    memset(shot,0,sizeof(shot));
-
+    memset(shot, 0, sizeof(shot));
 
     // 弾画像読み込み
-    int temp=LoadGraph("../graphics/shot.png");
-    int w,h;
-    GetGraphSize(temp,&w,&h);
+    int temp = LoadGraph("../graphics/shot.png");
+    int w, h;
+    GetGraphSize(temp, &w, &h);
 
     // フラグを全部falseにしとく
     // グラフィックハンドルと画像のサイズを代入しとく
-    for (int i=0;i<PSHOT_NUM;++i){
-        shot[i].flag=false;
-        shot[i].gh=temp;
-        shot[i].width=w;
-        shot[i].height=h;
+    for (int i = 0; i < PSHOT_NUM; ++i)
+    {
+        shot[i].flag = false;
+        shot[i].gh = temp;
+        shot[i].width = w;
+        shot[i].height = h;
     }
-    count=0;
-
-
+    count = 0;
 }
 
 void PLAYER::Shot()
 {
     // キーが押されててかつ、6ループに一回発射
-    if(key[KEY_INPUT_Z]==1&&count%6==0){
-        for(int i=0;i<PSHOT_NUM;++i){
-            if(shot[i].flag==false){
-                shot[i].flag==true;
-                shot[i].x=x;
-                shot[i].y=y;
+    if (key[KEY_INPUT_Z] == 1 && count % 6 == 0)
+    {
+        for (int i = 0; i < PSHOT_NUM; ++i)
+        {
+            if (shot[i].flag == false)
+            {
+                shot[i].flag == true;
+                shot[i].x = x;
+                shot[i].y = y;
                 break;
             }
         }
     }
 
     // 弾を移動させる処理
-    for(int i=0;i<PSHOT_NUM;++i){
+    for (int i = 0; i < PSHOT_NUM; ++i)
+    {
         // 発射してる弾だけ
-        if(shot[i].flag){
-            shot[i].y-=PSHOT_SPEED;
+        if (shot[i].flag)
+        {
+            shot[i].y -= PSHOT_SPEED;
 
             // 画面の外にはみ出したらフラグを戻す
-            if(shot[i].y<-10){
-                shot[i].flag=false;
+            if (shot[i].y < -10)
+            {
+                shot[i].flag = false;
             }
         }
     }
 }
-
 
 void PLAYER::Move()
 {
@@ -117,22 +119,28 @@ void PLAYER::Move()
         y += (int)PLAYER_SPEED * move;
     }
 
-<span class="stress">
+    <span class = "stress">
         // キャラの移動制御
-        if(x>400-MARGIN){
-            y=480-height/2-MARGIN;
-        }else if(x<MARGIN){
-            x=MARGIN;
-        }
+        if (x > 400 - MARGIN)
+    {
+        y = 480 - height / 2 - MARGIN;
+    }
+    else if (x < MARGIN)
+    {
+        x = MARGIN;
+    }
 
-        if(y>480-height/2-MARGIN){
-            y=480-height/2-MARGIN;
-        }else if(y<height/2+MARGIN){
-            y=height/2+MARGIN;
-        }
-</span>
+    if (y > 480 - height / 2 - MARGIN)
+    {
+        y = 480 - height / 2 - MARGIN;
+    }
+    else if (y < height / 2 + MARGIN)
+    {
+        y = height / 2 + MARGIN;
+    }
+    </ span>
 
-    if (key[KEY_INPUT_LEFT] == 1)
+        if (key[KEY_INPUT_LEFT] == 1)
     {
         if (xcount > 0)
             xcount = 0;
@@ -202,20 +210,25 @@ void PLAYER::Move()
         ycount = 0;
     }
 }
-void PLAYER::Draw(){
+void PLAYER::Draw()
+{
     // 弾描画
-    for(int i=0;i<PSHOT_NUM;++i){
-        if(shot[i].flag){
-            DrawGraph(shot[i].x-shot[i].width/2,shot[i].y-shot[i].height/2,shot[i].gh,TRUE);
+    for (int i = 0; i < PSHOT_NUM; ++i)
+    {
+        if (shot[i].flag)
+        {
+            DrawGraph(shot[i].x - shot[i].width / 2, shot[i].y - shot[i].height / 2, shot[i].gh, TRUE);
         }
     }
     // 生きていれば描画
-    if(life){
+    if (life)
+    {
         // 描画
-        DrawGraph(x-width/2,y-height/2,gh[result],TRUE);
+        DrawGraph(x - width / 2, y - height / 2, gh[result], TRUE);
     }
 }
-void PLAYER::All(){
+void PLAYER::All()
+{
     Move();
     Shot();
     Draw();
