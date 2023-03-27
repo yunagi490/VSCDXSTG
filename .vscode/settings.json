@@ -38,6 +38,8 @@
     "endflag",
     "PSHOT",
     "SNUM",
+    "tempx",
+    "tempy",
     "xcount",
     "ycount"
   ],

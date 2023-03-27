@@ -107,6 +107,33 @@ CONTROL::CONTROL()
     {
         // プレイヤークラスの解放
         delete player;
+        delete back;
+
+        for(int i=0;i<ENEMY_NUM;++i){
+            int(enemy[i]!=NULL){
+                delete enemy[i];
+            }
+        }
+    }
+    void CONTROL::GetPlayerPosition(double *x,double *y)
+    {
+        double tempx,tempy;
+        player->GetPosition(&tempx,&tempy);
+
+        *x=tempx;
+        *y=tempy;
+
+    }
+    
+    void CONTROL::GetEnemyPosition(int index,double *x,double *y)
+    {
+        double tempx,tempy;
+        // 指定した添字の敵の座標を取得
+        enemy[index]->GetPosition(&tempx,&tempy);
+
+        // 代入
+        *x=tempx;
+        *y=tempy;
     }
 
     void CONTROL::All()

@@ -227,6 +227,12 @@ void PLAYER::Draw()
         DrawGraph(x - width / 2, y - height / 2, gh[result], TRUE);
     }
 }
+void PLAYER::GetPosition(double *x,double *y)
+{
+    *x=this->x;
+    *y=this->y;
+    
+}
 void PLAYER::All()
 {
     Move();
