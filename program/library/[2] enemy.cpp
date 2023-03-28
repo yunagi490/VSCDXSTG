@@ -1,3 +1,4 @@
+#include "[0] control.h"
 #include "[2] enemy.h"
 #include "[4] define.h"
 #include "DxLib.h"
@@ -65,12 +66,25 @@ ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
 }
 void ENEMY::Shot()
 {
+    // CONTROLクラスの参照
+    CONTROL &control = CONTROL::GetInstance();
+    double px,py;
+
     // 発射タイミングになったら、フラグを立てる
     if(shot_time==g_count){
         sflag=true;
     }
     // フラグが立ってるときだけ
     if(sflag){
+        // プレイヤーの位置取得
+        control.GetPlayerPosition(&px,&py);
+
+        // 敵とプレイヤーとの座標の差から逆正接を求める
+        // 初回だけ実行
+        if(scount==0)
+            rad=atan2(py-y,px-x);
+
+
         switch(s_pattern){
             case 0:
                 // 10回に一回発射.40までなので5発発射
@@ -81,13 +95,88 @@ void ENEMY::Shot()
                             shot[i].flag=true;
                             shot[i].x=x;
                             shot[i].y=y;
+                            shot[i].rad=rad;
                             break;
                         }
                     }
 
                 }
                 break;
-        }
+            // プレイヤーに向かって直線ショット
+            case 1:
+            // 6ループに一回発射。54までなので10発発射
+            if(scount%6==0&&scount<=54){
+                for(int i=0;i<ENEMY_NUM;++i){
+                    // フラグが立ってない弾を探して、座標等をセット
+                    if(shot[i].flag==false){
+                        shot[i].flag=true;
+                        shot[i].x=x;
+                        shot[i].y=y;
+                        shot[i].rad=rad;
+                        break;
+                    }
+                }
+
+            }
+            break;
+            // 3直線ショット
+            case 2:
+                // 10ループに一回発射。1ループに3発なので5ループさせると15発発射
+                if(scount%10==0&&scount<=40){
+                    for(int i=0;i<ENEMY_SNUM;++i){
+                        // フラグが立ってない弾を探して、座標などをセット
+                        if(shot[i].flag==false){
+                        shot[i].flag=true;
+                        shot[i].x=x;
+                        shot[i].y=y;
+
+                        // 0と時は左より
+                        if(num==0){
+
+                            // 敵とプレイヤーとの逆正接から10土引いたラジアンを代入
+                            shot[i].rad=rad-(10*3.14/180);
+                        // 1の時はプレイヤー一直線
+                        }else if(num==1){
+                            // 敵とプレイヤーとの逆正接を代入
+                            shot[i].rad=rad;
+                        // 2の時は右寄り
+                        }else if(num==2){
+                            // 敵とプレイヤーとの逆正接から10度足した来事案を代入
+                            shot[i].rad=rad+(10*PI/180);
+                        }
+                            ++num;
+                        // 3初発射したら、numを0にしてループを抜ける。
+                        if(num==3){
+                            num=0;
+                            break;
+                        }
+                    }
+                }
+
+            }
+            break;
+        
+        // 乱射ショット
+        case 3:
+            // 1ループ毎に1発発射
+
+                for(int i=0;i<ENEMY_SNUM;++i){
+                    // フラグが立ってない弾を探して、座標等をセット
+                    if(shot[i].flag==false){
+                        shot[i].flag=true;
+                        shot[i].x=x;
+                        shot[i].y=y;
+                        // 初回だけ乱数初期化
+                        if(num==0)
+                            srand((unsigned int)time(NULL));
+                        
+                        shot[i].rad=aten2(py-y,px-x)-(60*PI/180)+((rand()%120)*PI/180);
+                        ++num;
+                        break;
+                    }
+                }
+                
+            }
         // フラグが立ってる弾の数
         int s=0;
 

@@ -19,14 +19,16 @@ struct SHOT{
     int gh;             // グラフィックハンドル
     int width,height;   // 画像の幅と高さ
 };
+
 struct E_SHOT{
-    bool flag;
-    double x;
-    double y;
-    int gh;
-    int width,height;
-    int pattern;
-    int speed;
+    bool flag;          // 弾が発射中かどうか
+    double x;           // x座標
+    double y;           // y座標
+    double rad;         // 角度(ラジアン) : ラジアン= 角度 *n(3.14) / 180
+    int gh;             // グラフィックハンドル
+    int width,height;   // 画像の幅と高さ
+    int pattern;        // ショットPattern
+    int speed;          // スピード
 };
 
 struct ENEMYDATA{
