@@ -1,16 +1,17 @@
 #ifndef _ENEMY
 #define _ENEMY
 
-class ENEMY{
+class ENEMY
+{
 private:
-    // 座標とグラフィックハンドル 
-    double x,y;
+    // 座標とグラフィックハンドル
+    double x, y;
     int gh[3];
-    
+
     // 画像サイズ
-    int width,height;
+    int width, height;
     // 出現、停止、帰還、発射タイミング
-    int in_time,stop_time,out_time;
+    int in_time, stop_time, out_time;
 
     // 敵の種類
     int type;
@@ -33,7 +34,7 @@ private:
     int count;
     // 発射した弾数
     int num;
-    
+
     // 発射直後のラジアン
     double rad;
 
@@ -57,8 +58,8 @@ private:
 
 public:
     ENEMY();
-    ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
-            int in_time,int stop_time, int shot_time,int out_time,
-                char *s_filename,int stype,int s_pattern,int speed);
+    ENEMY(char *c_filename, int type, int m_pattern, int x, int y,
+          int in_time, int stop_time, int shot_time, int out_time,
+          char *s_filename, int stype, int s_pattern, int speed);
 };
 #endif
