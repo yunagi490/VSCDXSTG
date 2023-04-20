@@ -58,7 +58,7 @@ private:
 public:
     KOMY();
     KOMY(char *c_filename, int type, int m_pattern, int x, int y,
-          int in_time, int stop_time, int shot_time, int out_time,
-          char *s_filename, int stype, int s_pattern, int speed);
+         int in_time, int stop_time, int shot_time, int out_time,
+         char *s_filename, int stype, int s_pattern, int speed);
 };
 #endif
