@@ -29,4 +29,18 @@ ExBoss_KOMY::KOMY(char *c_filename, int type, int m_pattern, int x, int y,
         this->shot_time = shot_time;
         this->out_time = out_time;
     */
+    this->hp = hp;
+    this->item = item;
+
+    // 敵画像読み込み
+    if (type == 0)
+    {
+        LoadGraph("");
+    }
+    int temp;
+    // 弾画像読み込み
+    if (stype == 0)
+    {
+        temp == LoadGraph("../graphics/E_shot.png");
+    }
 }
