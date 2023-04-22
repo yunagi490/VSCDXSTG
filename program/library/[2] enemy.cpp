@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "[0] control.h"
 #include "[2] enemy.h"
 #include "[4] define.h"
