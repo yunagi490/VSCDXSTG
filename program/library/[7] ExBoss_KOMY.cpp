@@ -35,7 +35,7 @@ ExBoss_KOMY::KOMY(char *c_filename, int type, int m_pattern, int x, int y,
     // 敵画像読み込み
     if (type == 0)
     {
-        LoadGraph("");
+        LoadGraph("../graphics/komy.png");
     }
     int temp;
     // 弾画像読み込み
