@@ -49,11 +49,11 @@ private:
     int EXB_scount;
 
 private:
-    bool ExB_All();
-    void ExB_Move();
-    void ExB_Draw();
-    bool ExB_OutCheck();
-    bool ExB_sOutCheck();
+    bool ExBs_All();
+    void ExBs_Move();
+    void ExBs_Draw();
+    bool ExBs_OutCheck();
+    bool ExBs_sOutCheck();
 
 public:
     SUZU();

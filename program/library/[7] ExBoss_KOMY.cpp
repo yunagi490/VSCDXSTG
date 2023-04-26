@@ -43,4 +43,6 @@ ExBoss_KOMY::KOMY(char *c_filename, int type, int m_pattern, int x, int y,
     {
         temp == LoadGraph("../graphics/E_shot.png");
     }
+    int EBK_w, EBK_h;
+    GetGraphSize(temp == &EBK_w, &EBK_h);
 }

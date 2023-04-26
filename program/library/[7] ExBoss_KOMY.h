@@ -49,11 +49,11 @@ private:
     int EXB_scount;
 
 private:
-    bool ExB_All();
-    void ExB_Move();
-    void ExB_Draw();
-    bool ExB_OutCheck();
-    bool ExB_sOutCheck();
+    bool ExBk_All();
+    void ExBk_Move();
+    void ExBk_Draw();
+    bool ExBk_OutCheck();
+    bool ExBk_sOutCheck();
 
 public:
     KOMY();
