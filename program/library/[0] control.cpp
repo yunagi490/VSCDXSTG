@@ -1,5 +1,6 @@
 #include "[0] control.h"
 #include "[4] define.h"
+#include "[6] enemytype.h"
 #include "DxLib.h"
 
 CONTROL::CONTROL()
