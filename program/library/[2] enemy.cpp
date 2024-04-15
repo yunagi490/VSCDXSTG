@@ -1,11 +1,12 @@
+#include <stdio.h>
 #include "[0] control.h"
 #include "[2] enemy.h"
 #include "[4] define.h"
 #include "DxLib.h"
 
-ENEMY::ENEMY(char *c_filename, int type, int m_pattern, int x, int y,
-            int in_time, int stop_time, int shot_time, int out_time,
-             char *s_filename, int stype, int s_pattern, int speed)
+ENEMY::ENEMY(char *c_filename,int type,int m_pattern,int x,int y,
+            int in_time,int stop_time, int shot_time,int out_time,
+                char *s_filename,int stype,int s_pattern,int speed)
 {
     // サイズ
     width = 64;
@@ -331,3 +332,5 @@ bool ENEMY::All()
 
     return endflag;
 }
+
+
