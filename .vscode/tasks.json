@@ -1,66 +1,97 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "label": "build",
-      "type": "process",
-      "command": "g++.exe",
-      "args": [
-        "-std=gnu++14",
-        "-O2",
-        "-Wall",
-        "-DDX_GCC_COMPILE",
-        "-DDX_NON_INLINE_ASM",
-        "-I${workspaceFolder}/program/library",
-        "-I${workspaceFolder}/program/game/graph_cls/grp_control",
-        "-I${workspaceFolder}/program/game/dice/control",
-        "-I${workspaceFolder}/program/game/dice/d_Class",
-        "-IC:/pg/mingw64/include",
-        "-IC:/12_2_0_x86_64_release_win32_seh_ucrt_rt_v10_rev2",
-        "${workspaceFolder}/program/system/sys_main.cpp",
-        "${workspaceFolder}/program/library/[0] control.cpp",
-        "${workspaceFolder}/program/library/[1] player.cpp",
-        "${workspaceFolder}/program/library/[2] enemy.cpp",
-        "${workspaceFolder}/program/library/[3] shot.cpp",
-        "${workspaceFolder}/program/library/[5] back.cpp",
-        "${workspaceFolder}/program/library/[6] enemytype.cpp",
-        "${workspaceFolder}/program/library/[6] BossEnemy.cpp",
-        "${workspaceFolder}/program/library/[7] ExBoss_KOMY.cpp",
-        "${workspaceFolder}/program/library/[8] ExBoss_Suzu.cpp",
-        "${workspaceFolder}/program/game/graph_cls/grp_control/[1] graph_control.cpp",
-        "${workspaceFolder}/program/game/dice/control/[1] dice_control.cpp",
-        "${workspaceFolder}/program/game/dice/control/[2] cls_std.cpp",
-        "${workspaceFolder}/program/game/dice/d_Class/[1] dice_1d6.cpp",
-        "${workspaceFolder}/program/game/dice/d_Class/[2] dice_std.cpp",
-        "-mwindows",
-        "-LC:/pg/mingw64/lib",
-        "-LC:/12_2_0_x86_64_release_win32_seh_ucrt_rt_v10_rev2",
-        "-lDxLib",
-        "-lDxUseCLib",
-        "-lDxDrawFunc",
-        "-ljpeg",
-        "-lpng",
-        "-lzlib",
-        "-ltiff",
-        "-ltheora_static",
-        "-lvorbis_static",
-        "-lvorbisfile_static",
-        "-logg_static",
-        "-lbulletdynamics",
-        "-lbulletcollision",
-        "-lbulletmath",
-        "-lopusfile",
-        "-lopus",
-        "-lsilk_common",
-        "-lcelt",
-        "-o",
-        "${workspaceFolder}/program/system/VSCDXSTG.exe"
-      ],
-      "group": {
-        "kind": "build",
-        "isDefault": true
-      },
-      "problemMatcher": ["$gcc"]
-    }
-  ]
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "process",
+            "command": "C:/pg/mingw64/bin/g++.exe",
+            "args": [
+                "-std=gnu++14",
+                "-O0",
+                "-g",
+                "-Wall",
+
+                "-DDX_GCC_COMPILE",
+                "-DDX_NON_INLINE_ASM",
+
+                "-IC:/Dxlib_gcc",
+                "-I${workspaceFolder}/program",
+                "-I${workspaceFolder}/program/library",
+                "-I${workspaceFolder}/program/game/graph_cls/grp_control",
+                "-I${workspaceFolder}/program/game/dice/control",
+                "-I${workspaceFolder}/program/game/dice/d_Class",
+
+                "${workspaceFolder}/program/system/sys_main.cpp",
+
+                "${workspaceFolder}/program/library/[0] control.cpp",
+                "${workspaceFolder}/program/library/[1] player.cpp",
+                "${workspaceFolder}/program/library/[2] enemy.cpp",
+                "${workspaceFolder}/program/library/[3] shot.cpp",
+                "${workspaceFolder}/program/library/[5] back.cpp",
+                "${workspaceFolder}/program/library/[6] enemytype.cpp",
+                "${workspaceFolder}/program/library/[6] BossEnemy.cpp",
+                "${workspaceFolder}/program/library/[7] ExBoss_KOMY.cpp",
+                "${workspaceFolder}/program/library/[8] ExBoss_Suzu.cpp",
+
+                "${workspaceFolder}/program/game/graph_cls/grp_control/[1] graph_control.cpp",
+                "${workspaceFolder}/program/game/dice/control/[1] dice_control.cpp",
+                "${workspaceFolder}/program/game/dice/control/[2] cls_std.cpp",
+                "${workspaceFolder}/program/game/dice/d_Class/[1] dice_1d6.cpp",
+                "${workspaceFolder}/program/game/dice/d_Class/[2] dice_std.cpp",
+
+                "-mwindows",
+
+                "-LC:/Dxlib_gcc",
+
+                "-Wl,--start-group",
+
+                "-lDxLib",
+                "-lDxUseCLib",
+                "-lDxDrawFunc",
+
+                "-ljpeg",
+                "-lpng",
+                "-lzlib",
+                "-ltiff",
+
+                "-ltheora_static",
+                "-lvorbis_static",
+                "-lvorbisfile_static",
+                "-logg_static",
+
+                "-lbulletdynamics",
+                "-lbulletcollision",
+                "-lbulletmath",
+
+                "-lopusfile",
+                "-lopus",
+                "-lsilk_common",
+                "-lcelt",
+
+                "-Wl,--end-group",
+
+                "-lwinmm",
+                "-lgdi32",
+                "-lole32",
+                "-loleaut32",
+                "-luuid",
+                "-lcomdlg32",
+                "-lshell32",
+                "-luser32",
+
+                "-o",
+                "${workspaceFolder}/program/system/VSCDXSTG.exe"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/program/game"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        }
+    ]
 }

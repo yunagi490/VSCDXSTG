@@ -1,5 +1,5 @@
 #include "[2] dice_std.h"
-#include "[2] cls_std.h"
+#include "../control/[2] cls_std.h"
 
 int DICE_STD::Roll()
 {
