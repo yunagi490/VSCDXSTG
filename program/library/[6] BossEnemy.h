@@ -1,64 +1,67 @@
-#ifndef _ExBoss
-#define _ExBoss
+#ifndef _BOSS_ENEMY
+#define _BOSS_ENEMY
 
-class EXBOSS
+#include "[4] define.h"
+#include "[1] graph_control.h"
+
+// ボス共通の土台クラス。移動(Move)と攻撃(Shoot)だけ派生クラスで作る。
+// 通常ボス(BOSS_NORMAL)も、EXボス(KOMY / SUZU)もこれを継承する。
+class BOSS
 {
-private:
-    // 座標とグラフィックハンドル
+protected:
+    // 座標と画像
     double x, y;
-    int gh[3];
+    VS_GRAPH img;
+    double size;   // 描画サイズ(px)
+    double radius; // 当たり判定半径
 
-    // 画像サイズ
-    int width, height;
-
-    // 敵の種類
-    int EBK_type;
-
-    // 弾の種類
-    int EBK_Stype;
-
-    // 移動パターン
-    int EBKm_pattern;
-
-    // ショットパターン
-    int EBKs_pattern;
-
-    // HP
-    int hp;
-    // アイテム
-    int item;
-
+    int hp, maxhp;
     // ボスが出現してからのカウント
-    int EBK_count;
-    // 発射した段数
-    int EBK_num;
+    int count;
+    bool dead;
 
-    // 発射直後のラジアン
-    double rad;
+    DIFFICULTY diff;
+    const char *name;
 
-    // ボス消滅デフラグ
-    bool dead_EXBFlag;
-    bool end_EXBFlag;
-
-    // 弾構造体
-    EBK_SHOT ebk_shot[ExBossK_SNUM];
-
-    // ショットが撃てるようになったかのデフラグ
-    bool EXB_sflag;
-    // ショットが撃てるようになってからのカウント
-    int EXB_scount;
-
-private:
-    bool ExB_All();
-    void ExB_Move();
-    void ExB_Draw();
-    bool ExB_OutCheck();
-    bool ExB_sOutCheck();
+protected:
+    // 現在地から目標へ rate(0〜1) の割合だけ近づく
+    void MoveToward(double tx, double ty, double rate);
+    virtual void Move(const GAMECTX &ctx) = 0;
+    virtual void Shoot(const GAMECTX &ctx) = 0;
 
 public:
-    KOMY();
-    KOMY(char *c_filename, int type, int m_pattern, int x, int y,
-         int in_time, int stop_time, int shot_time, int out_time,
-         char *s_filename, int stype, int s_pattern, int speed);
+    BOSS(const DIFFICULTY &d, const char *imgName, double drawSize,
+         double hitRadius, int baseHp, const char *bossName);
+    virtual ~BOSS() {}
+
+    void Update(const GAMECTX &ctx);
+    virtual void Draw() const;
+    void DrawHpBar() const;
+
+    // ダメージを与える (無敵中は無効)
+    void Damage(int d);
+    void Kill() { hp = 0; dead = true; }
+    virtual bool Vulnerable() const { return true; }
+
+    bool IsDead() const { return dead; }
+    const char *Name() const { return name; }
+    void GetPosition(double *px, double *py) const
+    {
+        *px = x;
+        *py = y;
+    }
+    double Radius() const { return radius; }
 };
+
+// 通常のステージボス
+class BOSS_NORMAL : public BOSS
+{
+public:
+    BOSS_NORMAL(const DIFFICULTY &d);
+
+protected:
+    void Move(const GAMECTX &ctx) override;
+    void Shoot(const GAMECTX &ctx) override;
+};
+
 #endif

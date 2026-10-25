@@ -1,64 +1,24 @@
 #ifndef _ExBoss_SUZU
 #define _ExBoss_SUZU
 
-class ExBoss_SUZU
+#include "[6] BossEnemy.h"
+
+// EXボス スズ (ExBEnemy_M)
+// 攻撃: 無限に遠距離から狙ってくる。たまに消えて、油断したところを撃ってくる。
+// 出現条件: ボス撃破時のダイス 1d9 で 9 が3回連続 (999)
+class ExBoss_SUZU : public BOSS
 {
 private:
-    // 座標とグラフィックハンドル
-    double x, y;
-    int gh[3];
-
-    // 画像サイズ
-    int width, height;
-
-    // 敵の種類
-    int EBK_type;
-
-    // 弾の種類
-    int EBK_Stype;
-
-    // 移動パターン
-    int EBKm_pattern;
-
-    // ショットパターン
-    int EBKs_pattern;
-
-    // HP
-    int hp;
-    // アイテム
-    int item;
-
-    // ボスが出現してからのカウント
-    int EBK_count;
-    // 発射した段数
-    int EBK_num;
-
-    // 発射直後のラジアン
-    double rad;
-
-    // ボス消滅デフラグ
-    bool dead_EXBFlag;
-    bool end_EXBFlag;
-
-    // 弾構造体
-    EBK_SHOT ebk_shot[ExBossK_SNUM];
-
-    // ショットが撃てるようになったかのデフラグ
-    bool EXB_sflag;
-    // ショットが撃てるようになってからのカウント
-    int EXB_scount;
-
-private:
-    bool ExBs_All();
-    void ExBs_Move();
-    void ExBs_Draw();
-    bool ExBs_OutCheck();
-    bool ExBs_sOutCheck();
+    int alpha; // 0〜255 (消えている間は0)
 
 public:
-    SUZU();
-    SUZU(char *c_filename, int type, int m_pattern, int x, int y,
-         int in_time, int stop_time, int shot_time, int out_time,
-         char *s_filename, int stype, int s_pattern, int speed);
+    ExBoss_SUZU(const DIFFICULTY &d);
+    void Draw() const override;
+    // 消えている間は攻撃が当たらない
+    bool Vulnerable() const override { return alpha >= 128; }
+
+protected:
+    void Move(const GAMECTX &ctx) override;
+    void Shoot(const GAMECTX &ctx) override;
 };
 #endif

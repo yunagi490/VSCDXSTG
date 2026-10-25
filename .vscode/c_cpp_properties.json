@@ -5,7 +5,7 @@
       "includePath": [
         "${workspaceFolder}/**",
         "C:/pg/mingw64/include",
-        "C:/12_2_0_x86_64_release_win32_seh_ucrt_rt_v10_rev2"
+        "C:/Dxlib_gcc"
       ],
       "defines": [
         "_DEBUG",

@@ -1,29 +1,31 @@
-#ifndef _ENEMY
-#define _ENEMY
+#ifndef _ENEMY_H
+#define _ENEMY_H
+
+#include "[4] define.h"
+#include "[1] graph_control.h"
 
 class ENEMY
 {
 private:
-    // 座標とグラフィックハンドル
+    // 座標と画像
     double x, y;
-    int gh[3];
+    VS_GRAPH img;
+    double size; // 描画サイズ
 
-    // 画像サイズ
-    int width, height;
-    // 出現、停止、帰還、発射タイミング
-    int in_time, stop_time, out_time;
+    // 出現してからの停止、発射、帰還タイミング (出現時を0とした相対フレーム)
+    int stop_time, shot_time, out_time;
 
     // 敵の種類
     int type;
-
     // 弾の種類
     int stype;
-
     // 移動パターン
     int m_pattern;
-
     // ショットパターン
     int s_pattern;
+
+    // 弾スピード
+    double bulletSpeed;
 
     // HP
     int hp;
@@ -32,34 +34,28 @@ private:
 
     // 敵が出現してからのカウント
     int count;
-    // 発射した弾数
-    int num;
 
     // 発射直後のラジアン
     double rad;
 
-    // 敵消滅フラグ
-    bool deadflag;
-    bool endflag;
-
-    // 弾構造体
-    E_SHOT shot[ENEMY_SNUM];
     // ショットが撃てるようになったかのフラグ
     bool sflag;
     // ショットが撃てるようになってからのカウント
     int scount;
 
 private:
-    bool All();
     void Move();
-    void Draw();
-    bool OutCheck();
-    bool ShotOutCheck(int i);
+    void Shoot(const GAMECTX &ctx);
+    bool OutCheck() const;
 
 public:
-    ENEMY();
-    ENEMY(char *c_filename, int type, int m_pattern, int x, int y,
-          int in_time, int stop_time, int shot_time, int out_time,
-          char *s_filename, int stype, int s_pattern, int speed);
+    ENEMY(const ENEMYDATA &d, const DIFFICULTY &diff);
+    // 画面外に出て不要になったらtrue
+    bool Update(const GAMECTX &ctx);
+    void Draw() const;
+    // ダメージを与える。倒したらtrue
+    bool Damage(int d);
+    void GetPosition(double *px, double *py) const;
+    double Radius() const { return 20.0; }
 };
 #endif
