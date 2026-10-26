@@ -73,11 +73,26 @@ struct ENEMYDATA
 struct DIFFICULTY
 {
     int roll;        // 1d100 の出目 (ファンブル時は100固定)
+    int tier;        // 難易度の階層 (DIFF_TIER)
     bool fumble;     // ファンブルによる強制最高難易度か
     double speedMul; // 弾速・ボス弾速の倍率
     double hpMul;    // 敵HPの倍率
-    int extra;       // 弾幕の追加段階 (0〜4) : way数・密度が増える
+    // int extra;       // 弾幕の追加段階 (0〜4) : way数・密度が増える
+    int extra;       // 弾幕の追加段階 (0〜5。EGGとEASYは0) : way数・密度が増える
 };
+enum DIFF_TIER{
+    TIER_EGG = 0,
+    TIER_EASY,
+    TIER_NORMAL,
+    TIER_HARD,
+    TIER_LUNATIC,
+    TIER_APOTHEOSIS // 最高難易度(100もこれに対応)
+};
+
+inline const char *DiffTierName(int tier) {
+    static const char *names[] = {"EGG", "EASY", "NORMAL", "HARD", "LUNATIC", "APOTHEOSIS"};
+    return names[tier];
+}
 
 // EXボスの種類
 enum EXBOSS_KIND

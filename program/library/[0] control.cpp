@@ -8,15 +8,16 @@
 
 static const char *DiffName(const DIFFICULTY &d)
 {
-    if (d.fumble)
-        return "FUMBLE (MAX)";
-    if (d.roll <= 20)
-        return "EASY";
-    if (d.roll <= 60)
-        return "NORMAL";
-    if (d.roll <= 90)
-        return "HARD";
-    return "LUNATIC";
+    // if (d.fumble)
+    //     return "FUMBLE (MAX)";
+    // if (d.roll <= 20)
+    //     return "EASY";
+    // if (d.roll <= 60)
+    //     return "NORMAL";
+    // if (d.roll <= 90)
+    //     return "HARD";
+    // return "LUNATIC";
+    return DiffTierName(d.tier);
 }
 
 CONTROL::CONTROL()
