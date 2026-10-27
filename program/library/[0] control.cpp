@@ -90,10 +90,12 @@ void CONTROL::SpawnBoss(EXBOSS_KIND kind)
     switch (kind)
     {
     case EXB_KOMY:
-        boss = new ExBoss_KOMY(dice.Diff());
+        // boss = new ExBoss_KOMY(dice.Diff());
+        boss = new ExBoss_KOMY(dice.ExBossDiff());
         break;
     case EXB_SUZU:
-        boss = new ExBoss_SUZU(dice.Diff());
+        // boss = new ExBoss_SUZU(dice.Diff());
+        boss = new ExBoss_SUZU(dice.ExBossDiff());
         break;
     default:
         boss = new BOSS_NORMAL(dice.Diff());

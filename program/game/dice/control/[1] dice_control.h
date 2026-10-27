@@ -47,6 +47,9 @@ public:
     void ForceExBoss(EXBOSS_KIND k);
 
     const DIFFICULTY &Diff() const { return diff; }
+    // EXボス用の難易度 (出目やファンブル関係なく常にAPOTHEOSIS扱い)
+    DIFFICULTY ExBossDiff() const;
+
     int Last6() const { return last6; }
     int Last9() const { return last9; }
     bool IsFumble6() const { return last6 == 6; }

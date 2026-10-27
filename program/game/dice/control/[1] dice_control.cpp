@@ -67,6 +67,11 @@ void DICE_CTL::MakeDiff(int roll, bool fumble)
     diff.extra = diff.tier > TIER_EASY ? diff.tier - TIER_EASY : 0;
 }
 
+DIFFICULTY DICE_CTL::ExBossDiff() const{
+    DICE_CTL tmp;   // 難易度の計算式を MakeDiff に一本化するため、一時オブジェクトで求める
+    tmp.MakeDiff(100, false);
+    return tmp.Diff();
+}
 
 const DIFFICULTY &DICE_CTL::RollStage()
 {
