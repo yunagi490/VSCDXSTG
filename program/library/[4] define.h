@@ -86,11 +86,12 @@ enum DIFF_TIER{
     TIER_NORMAL,
     TIER_HARD,
     TIER_LUNATIC,
+    TIER_RAGNAROK,
     TIER_APOTHEOSIS // 最高難易度(100もこれに対応)
 };
 
 inline const char *DiffTierName(int tier) {
-    static const char *names[] = {"EGG", "EASY", "NORMAL", "HARD", "LUNATIC", "APOTHEOSIS"};
+    static const char *names[] = {"EGG", "EASY", "NORMAL", "HARD", "LUNATIC", "RAGNAROK", "APOTHEOSIS"};
     return names[tier];
 }
 

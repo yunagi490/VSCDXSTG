@@ -32,23 +32,6 @@ int DICE_CTL::Streak(const int *h, int v)
     return n;
 }
 
-void DICE_CTL::MakeDiff(int roll, bool fumble)
-{
-    diff.roll = roll;
-    diff.fumble = fumble;
-    diff.tier = fumble ? TIER_APOTHEOSIS : TierFromRoll(roll);
-
-    // 弾速・HP は 0.8倍〜1.4倍。Ragnarok は +0.1、Apotheosis は +0.2 の上乗せ
-    double bonus = 0.0;
-    if (diff.tier > TIER_LUNATIC)
-        bonus = 0.1 * (diff.tier - TIER_LUNATIC);
-    diff.speedMul = 0.8 + 0.006 * roll + bonus;
-    diff.hpMul = 0.8 + 0.006 * roll + bonus;
-
-    // 弾幕の追加段階 : EGG と EASY は 0、そこから1ランクごとに +1 (最大5)
-    diff.extra = diff.tier > TIER_EASY ? diff.tier - TIER_EASY : 0;
-}
-
 // 1d100 の出目 -> 難易度ランク (境目はここで調整する)
 static int TierFromRoll(int roll)
 {
@@ -66,6 +49,24 @@ static int TierFromRoll(int roll)
         return TIER_EASY;
     return TIER_EGG;
 }
+
+void DICE_CTL::MakeDiff(int roll, bool fumble)
+{
+    diff.roll = roll;
+    diff.fumble = fumble;
+    diff.tier = fumble ? TIER_APOTHEOSIS : TierFromRoll(roll);
+
+    // 弾速・HP は 0.8倍〜1.4倍。Ragnarok は +0.1、Apotheosis は +0.2 の上乗せ
+    double bonus = 0.0;
+    if (diff.tier > TIER_LUNATIC)
+        bonus = 0.1 * (diff.tier - TIER_LUNATIC);
+    diff.speedMul = 0.8 + 0.006 * roll + bonus;
+    diff.hpMul = 0.8 + 0.006 * roll + bonus;
+
+    // 弾幕の追加段階 : EGG と EASY は 0、そこから1ランクごとに +1 (最大5)
+    diff.extra = diff.tier > TIER_EASY ? diff.tier - TIER_EASY : 0;
+}
+
 
 const DIFFICULTY &DICE_CTL::RollStage()
 {
